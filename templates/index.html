@@ -1,83 +1,106 @@
-<style>
-    body {
-      background-color: #e0f2f1; /* Light blue background */
-      font-family: Open Sans, sans-serif; /* Fallback for sans-serif */
-    }
-  
-    h1 {
-      color: #3498db; /* Primary - Blue */
-      font-family: Montserrat, sans-serif; /* Headings use Montserrat */
-      font-size: 2em;
-      margin-bottom: 1em;
-    }
-  
-    label {
-      color: #2c3e50; /* Text color - Dark grey */
-      display: block;
-      margin-bottom: 0.5em;
-    }
-  
-    input[type="text"],
-    input[type="submit"] {
-      padding: 0.8em 1em;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 1em;
-    }
-  
-    input[type="submit"] {
-      background-color: #f1c40f; /* Secondary - Light orange */
-      color: #fff; /* White text */
-      cursor: pointer;
-    }
-  </style>
-  
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <title>EPS Prediction by Machine Learning</title>
-  </head>
-  <body>
-  
-    <h1>EPS Prediction by Machine Learning</h1>
-    
-    <form action="/predict" method="POST">
-  
-      <label for="ROCE (%)">ROCE (%):</label>
-      <input type="text" id="ROCE (%)" name="ROCE (%)" required><br>
-  
-      <label for="CASA (%)">CASA (%):</label>
-      <input type="text" id="CASA (%)" name="CASA (%)" required><br>
-  
-      <label for="Return on Equity / Networth (%)">Return on Equity / Networth (%):</label>
-      <input type="text" id="Return on Equity / Networth (%)" name="Return on Equity / Networth (%)" required><br>
-  
-      <label for="Non-Interest Income/Total Assets (%)">Non-Interest Income/Total Assets (%):</label>
-      <input type="text" id="Non-Interest Income/Total Assets (%)" name="Non-Interest Income/Total Assets (%)" required><br>
-  
-      <label for="Operating Profit/Total Assets (%)">Operating Profit/Total Assets (%):</label>
-      <input type="text" id="Operating Profit/Total Assets (%)" name="Operating Profit/Total Assets (%)" required><br>
-  
-      <label for="Operating Expenses/Total Assets (%)">Operating Expenses/Total Assets (%):</label>
-      <input type="text" id="Operating Expenses/Total Assets (%)" name="Operating Expenses/Total Assets (%)" required><br>
-  
-      <label for="Interest Expenses/Total Assets (%)">Interest Expenses/Total Assets (%):</label>
-      <input type="text" id="Interest Expenses/Total Assets (%)" name="Interest Expenses/Total Assets (%)" required><br>
-  
-      <label for="Face_value">Face value:</label>
-      <input type="text" id="Face_value" name="Face_value" required><br><br><br>
-  
-  
-  
-  
-      <input type="submit" value="Predict using ML"><br><br><br>
-  
-  
-      
-      <p style="font-size: 1.2em; font-weight: bold;">EPS Predicted: <span id="result">{{result}}</span></p>
-  
-  
-    </form>
-  </body>
-  </html>
-  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Prediction App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'TIMES NEW ROMAN', sans-serif;
+            background-color: #f8f9fa;
+            background: url('../static//bk6.jpg');
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .container {
+            background-color: #d3d483;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .input-field {
+            margin: 20px 0;
+        }
+
+        .input-field input {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        .input-field button {
+            padding: 10px 20px;
+            background-color: #9bb754;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .input-field button:hover {
+            background-color: #aacf78;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #17a2b8;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="mb-4">Credit Risk Assesment</h1>
+        <form id="predictionForm" action="/submit" method="post">
+            <div class="input-field">
+                <label for="userId" class="sr-only">Enter User ID:</label>
+                <input type="text" id="userId" name="userId" class="form-control" placeholder="Enter User ID" required>
+            </div>
+            <div class="input-field">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+        <div class="output" id="output"></div>
+        <div class="image-container">
+           
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
